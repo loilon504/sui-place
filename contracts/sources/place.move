@@ -1,5 +1,5 @@
 module sui_place::place {
-    use sui::object::UID;
+    use sui::object::{ UID, uid_to_address };
     use sui::tx_context::TxContext;
     use sui::transfer;
     use sui::dynamic_object_field;
@@ -82,7 +82,16 @@ module sui_place::place {
         *pixel = color;
     }
 
-    // public fun get_quadrants(place: &mut Place): vector<address> {
+    public fun get_quadrants(place: &Place): vector<address> {
+        let mut addresses = vector::empty<address>();
 
-    // }
+        let mut i = 0;
+        while (i < 4) {
+            let quadrant = dynamic_object_field::borrow<u8, Quadrant>(&place.id, i);
+            let quadrant_address = uid_to_address(&quadrant.id);
+            vector::push_back(&mut addresses, quadrant_address);
+            i = i + 1;
+        };
+        addresses
+    }
 }
