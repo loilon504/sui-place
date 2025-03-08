@@ -17,13 +17,15 @@ function App() {
           margin: "4rem", width: "512px", lineHeight: "2rem", display: "flex",
           flexDirection: "column", justifyContent: "center"
         }}>
-          <h1>Sui Place</h1>
+          <h1 style={{fontSize: "3rem"}}>Sui Place</h1>
           <p style={{marginTop: "4rem", marginBottom: "4rem"}}>
             Are you ready to join the Sui community in placing a tile on the board ? Select a color
             then ctrl+click (win) or cmd+click (mac) to place.
           </p>
-          <div style={{marginBottom: "4rem"}}>
-            <CompactPicker color={color} onChangeComplete={new_color => set_color(new_color.hex)} />
+          <div style={{ transform: "scale(1.3)", transformOrigin: "top left" }}>
+            <div style={{marginBottom: "4rem"}}>
+              <CompactPicker color={color} onChangeComplete={new_color => set_color(new_color.hex)} />
+            </div>
           </div>
         </div>
       </div>
@@ -34,7 +36,9 @@ function App() {
     </div>
   } else {
     return <div style={{display: "flex", justifyContent: "center"}}>
-      <SignInButton></SignInButton>
+      <SignInButton style={{padding: "1rem", marginTop: "16rem"}}>
+        <h1>Connect a Wallet to view Sui Place</h1>
+      </SignInButton>
     </div>
   }
 }
